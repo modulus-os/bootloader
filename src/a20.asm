@@ -125,7 +125,7 @@ enable_a20_kb:
 	out 0x64, al
 
 	call enable_a20_kb_wait2
-  in al,0x60
+	in al, 0x60
 
   call enable_a20_kb_wait
   mov al, 0xd1
@@ -136,18 +136,18 @@ enable_a20_kb:
 	out 0x60, al
 
 	call enable_a20_kb_wait
-  mov al, 0xae
-  out 0x64, al
+	mov al, 0xae
+	out 0x64, al
 
-  call enable_a20_kb_wait
-  sti
-  ret
+	call enable_a20_kb_wait
+	sti
+	ret
 
 enable_a20_kb_wait:
 	in al,0x64
 	test al,2
 	jnz enable_a20_kb_wait
-  ret
+	ret
 
 enable_a20_kb_wait2:
 	in al, 0x64

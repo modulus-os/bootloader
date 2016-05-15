@@ -10,7 +10,7 @@ bochs: $(BUILD)/bootloader.bin bochs.x86_64
 	bochs -f bochs.x86_64 -q
 
 $(BUILD)/bootloader.bin: $(wildcard $(SRC)/*.asm) $(BUILD)
-	cd $(SRC) && $(NASM) boot.asm -o ../$(BUILD)/bootloader.bin
+	cd $(SRC) && $(NASM) init.asm -o ../$(BUILD)/bootloader.bin
 
 $(BUILD):
 	mkdir -p $(BUILD)
