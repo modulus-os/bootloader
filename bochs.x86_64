@@ -1,0 +1,2 @@
+ata0-master: type=disk, path="build/bootloader.bin", cylinders=614, heads=6, spt=17
+boot: disk
