@@ -4,7 +4,7 @@ ASRC = $(wildcard $(SRC)/*.asm)
 NASM = nasm -f bin
 
 qemu: $(BUILD)/bootloader.bin
-	qemu-system-x86_64 -hda $(BUILD)/bootloader.bin
+	qemu-system-x86_64 -hda $(BUILD)/bootloader.bin -no-reboot -d int
 
 bochs: $(BUILD)/bootloader.bin bochs.x86_64
 	bochs -f bochs.x86_64 -q

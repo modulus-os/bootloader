@@ -1,18 +1,31 @@
 load_gdt:
-	lgdt [gdt]
+	lgdt [gdtr]
+
 	ret
 
-gdt:
+gdt_start:
 	; Null descriptor
-	dq 0
-	; Code selector
-	dd 0xffffffff
 	dw 0
-	dd 0x9a
-	; Data selector
-	dd 0xffffffff
 	dw 0
-	dd 0x9a
+	dw 0
+	dw 0
+	; Code descriptor
+	dw 0xffff ; Limit 0-15
+	dw 0 ; Base 0 - 15
+	db 0 ; Base 16 - 23
+	db 0x9a ; Access/Type byte
+	db 0b11001111; Limit & flags
+	db 0 ; Base 24 - 31
+	; Data descriptor
+	dw 0xffff ; Limit 0-15
+	dw 0 ; Base 0 - 15
+	db 0 ; Base 16 - 23
+	db 0x92 ; Access/Type byte
+	db 0b11001111; Limit & flags
+	db 0 ; Base 24 - 31
+
+gdt_end:
+
 gdtr:
-	dd $ - gdt - 1
-	dw gdt
+	dw gdt_end - gdt_start - 1
+	dd gdt_start

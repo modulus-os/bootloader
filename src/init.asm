@@ -2,10 +2,14 @@
 ;
 ; Stage one of bootloader; loads second stage
 
+bits 16
+
+org 0x7c00
+
 start:
 	cli
 
-	mov ax, 0x07c0
+	xor ax, ax
 	mov ds, ax
 
 	; Load second stage
@@ -27,7 +31,7 @@ da_pack:
 	db 0x10
 	db 0
 block_count:
-	dw 16
+	dw 2
 address:
 	dw 0x7c00 + 512
 	dw 0
@@ -35,8 +39,7 @@ lba:
 	dd 1
 	dd 0
 
-; Fill up rest of sector
-sig:
+; Fill up rest of sector and add boot signature
 	times 510-($-$$) db 0
 	db 0x55
 	db 0xaa
