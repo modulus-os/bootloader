@@ -1,4 +1,3 @@
-%include "print.asm"
 %include "a20.asm"
 %include "gdt.asm"
 
@@ -6,15 +5,14 @@ main:
 	xor ax, ax
 	mov ds, ax
 
-	; Print a message
-	mov si, init_msg
-	call print
-
-	; Load GDT
-	call load_gdt
+	mov si, msg_title
+	call print16
 
 	; Enable A20
 	call a20
+	
+	; Load GDT
+	call load_gdt
 
 	; Switch to protected mode
 	mov eax, cr0
@@ -23,9 +21,10 @@ main:
 
 	jmp 0x08:pmode
 
-init_msg db " * Modulus Bootloader * ", 13, 10, 0
+
+msg_title db " * Modulus Bootloader * ", 13, 10, 0
 
 %include "pmode.asm"
 
-; Fill rest of sector(s)
-	times (512 * 3)-($-$$) db 0
+; Fill rest of sector
+	times (512 - (($-$$) % 512)) db 0

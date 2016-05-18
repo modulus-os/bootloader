@@ -12,15 +12,15 @@ gdt_start:
 	; Code descriptor
 	dw 0xffff ; Limit 0-15
 	dw 0 ; Base 0 - 15
-	db 0 ; Base 16 - 23
-	db 0x9a ; Access/Type byte
+	db 0 ; Base 16 - 23s
+	db 0b10011010 ; Access/Type byte
 	db 0b11001111; Limit & flags
 	db 0 ; Base 24 - 31
 	; Data descriptor
 	dw 0xffff ; Limit 0-15
 	dw 0 ; Base 0 - 15
 	db 0 ; Base 16 - 23
-	db 0x92 ; Access/Type byte
+	db 0b10010010 ; Access/Type byte
 	db 0b11001111; Limit & flags
 	db 0 ; Base 24 - 31
 

@@ -1,4 +1,6 @@
 bits 32
 
 pmode:
-	jmp pmode
+	hlt
+.hang:
+	jmp .hang

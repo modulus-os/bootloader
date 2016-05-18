@@ -7,12 +7,12 @@ a20:
 
 .enabled:
 	mov si, a20_enabled
-	call print
+	call print16
 	ret
 
 .enable_bios:
 	mov si, a20_disabled_0
-	call print
+	call print16
 
 	mov ax, 0x2401
 	int 0x15
@@ -27,7 +27,7 @@ a20:
 
 .enable_kb:
 	mov si, a20_disabled_1
-	call print
+	call print16
 
 	call enable_a20_kb
 
@@ -41,7 +41,7 @@ a20:
 
 .enable_fast:
 	mov si, a20_disabled_2
-	call print
+	call print16
 
 	in al, 0x92
 	or al, 2
@@ -57,7 +57,7 @@ a20:
 
 .failed:
 	mov si, a20_disabled_3
-	call print
+	call print16
 
 	hlt
 	jmp .failed
@@ -144,8 +144,8 @@ enable_a20_kb:
 	ret
 
 enable_a20_kb_wait:
-	in al,0x64
-	test al,2
+	in al, 0x64
+	test al, 2
 	jnz enable_a20_kb_wait
 	ret
 
